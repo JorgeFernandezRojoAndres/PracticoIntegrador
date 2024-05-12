@@ -1,38 +1,44 @@
-// carousel.js
+'use strict'
 
-// Array de URLs de las imágenes
-const images = [
-    "img/imagen1.jpg",
-    "img/imagen2.jpg",
-    "img/imagen3.jpg",
-    "img/imagen4.jpg",
-    "img/imagen5.jpg",
-    "img/imagen6.jpg",
-    // Añade más URLs de imágenes según sea necesario
-];
+const grande    = document.querySelector('.grande')
+const punto     = document.querySelectorAll('.punto')
 
-let currentIndex = 0;
+// Cuando CLICK en punto
+    // Saber la posición de ese punto
+    // Aplicar un transform translateX al grande
+    // QUITAR la clase activo de TODOS puntos
+    // AÑADIR la clase activo al punto que hemos hecho CLICK
 
-function showImage(index) {
-    const imgElement = document.getElementById("carousel-img");
-    imgElement.src = images[index];
-}
+// Recorrer TODOS los punto
+punto.forEach( ( cadaPunto , i )=> {
+    // Asignamos un CLICK a cadaPunto
+    punto[i].addEventListener('click',()=>{
+        console.log('Punto clickeado');
 
-function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-}
+        // Guardar la posición de ese PUNTO
+        let posicion  = i
+        // Calculando el espacio que debe DESPLAZARSE el GRANDE
+        let operacion = posicion * -50
 
-function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-}
+        // MOVEMOS el grand
+        grande.style.transform = `translateX(${operacion}%)`;
 
-// Mostrar la primera imagen al cargar la página
-document.addEventListener("DOMContentLoaded", function() {
-    showImage(currentIndex);
+        // Recorremos TODOS los punto
+        punto.forEach( ( cadaPunto , i )=>{
+            // Quitamos la clase ACTIVO a TODOS los punto
+            punto[i].classList.remove('activo');
+        })
+        // Añadir la clase activo en el punto que hemos hecho CLICK
+        punto[i].classList.add('activo');
+
+    });
 });
 
-// Agregar event listeners para los botones de avance y retroceso
-document.getElementById("btn-next").addEventListener("click", nextImage);
-document.getElementById("btn-prev").addEventListener("click", prevImage);
+
+
+
+
+
+
+
+
