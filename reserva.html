@@ -5,6 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("reserva-form");
+            const nombre = document.getElementById("nombre");
+            const email = document.getElementById("email");
+            const telefono = document.getElementById("telefono");
+            const fecha = document.getElementById("fecha");
+            const hora = document.getElementById("hora");
+            const personas = document.getElementById("personas");
+            const errorDiv = document.getElementById("mensaje-error");
+
+            function crearMensajeExito() {
+                const successDiv = document.createElement("div");
+                successDiv.id = "mensaje-exito";
+                successDiv.style.color = "green";
+                successDiv.style.display = "none";
+                errorDiv.insertAdjacentElement("afterend", successDiv);
+                return successDiv;
+            }
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                errorDiv.innerHTML = "";
+                let successDiv = document.getElementById("mensaje-exito");
+                if (!successDiv) {
+                    successDiv = crearMensajeExito();
+                }
+                successDiv.innerHTML = "";
+                let isValid = true;
+
+                if (nombre.value.trim() === "" || email.value.trim() === "" || telefono.value.trim() === "" || fecha.value.trim() === "" || hora.value.trim() === "" || personas.value.trim() === "") {
+                    isValid = false;
+                    errorDiv.innerHTML = "<p>Por favor, completa todos los campos.</p>";
+                }
+
+                const emailRegex = /^\S+@\S+\.\S+$/;
+                if (!emailRegex.test(email.value)) {
+                    isValid = false;
+                    errorDiv.innerHTML += "<p>Por favor, introduce un correo electrónico válido.</p>";
+                }
+
+                if (personas.value.trim() === "" || personas.value < 1) {
+                    isValid = false;
+                    errorDiv.innerHTML += "<p>El número de personas es obligatorio y debe ser al menos 1.</p>";
+                }
+
+                if (isValid) {
+                    errorDiv.style.display = "none";
+                    successDiv.innerHTML = `
+                        <p>La reserva se gestionó con éxito.</p>
+                        <p><strong>Nombre:</strong> ${nombre.value}</p>
+                        <p><strong>Email:</strong> ${email.value}</p>
+                        <p><strong>Teléfono:</strong> ${telefono.value}</p>
+                        <p><strong>Fecha:</strong> ${fecha.value}</p>
+                        <p><strong>Hora:</strong> ${hora.value}</p>
+                        <p><strong>Personas:</strong> ${personas.value}</p>
+                    `;
+                    successDiv.style.display = "block";
+                    form.reset();
+                } else {
+                    errorDiv.style.display = "block";
+                    successDiv.style.display = "none";
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -18,7 +84,6 @@
                 <li><a href="quienes-somos.html">Quiénes somos</a></li>
                 <li><a href="reserva.html">Reserva</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
-                
             </ul>
             <a href="https://www.instagram.com" class="social-icon">
                 <img src="img/instagram-icon.png" alt="Instagram">
@@ -29,27 +94,28 @@
         <section>
             <h2>Reserva una mesa</h2>
             <p>¡Reserva tu mesa y disfruta de una experiencia culinaria única en AltaCocina!</p>
-            <form>
+            <form id="reserva-form">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre">
                 
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email">
                 
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
+                <input type="tel" id="telefono" name="telefono">
                 
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
+                <input type="date" id="fecha" name="fecha">
                 
                 <label for="hora">Hora:</label>
-                <input type="time" id="hora" name="hora" required>
+                <input type="time" id="hora" name="hora">
                 
                 <label for="personas">Número de Personas:</label>
-                <input type="number" id="personas" name="personas" required min="1">
+                <input type="number" id="personas" name="personas">
                 
                 <button type="submit">Reservar</button>
             </form>
+            <div id="mensaje-error" style="color: red; display: none;"></div>  
         </section>
     </main>
     <footer>
