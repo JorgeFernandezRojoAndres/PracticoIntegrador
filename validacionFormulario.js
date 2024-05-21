@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             successDiv.style.display = "block";  // Mostramos el mensaje de éxito
             form.reset();  // Reiniciamos el formulario   
         } else {
-            errorDiv.style.display = "block";  // Mostramos los mensajes de error
+            errorDiv.style.display = "block";  //m Mostramos los mensajes de error
             successDiv.style.display = "none";  // Ocultamos cualquier mensaje de éxito previo
         }
     });
