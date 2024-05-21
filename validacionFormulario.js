@@ -4,11 +4,12 @@ function validarFormulario() {
     var email = document.getElementById('email').value;
     var mensaje = document.getElementById('mensaje').value;
 
-    // Validación básica
+    // Validación 
     if (nombre.trim() === '' || email.trim() === '' || mensaje.trim() === '') {
         alert('Por favor, completa todos los campos.');
         return false;
     }
+    //no usar alertas nativas !jamas
 
     // Validación de formato de correo electrónico
     var emailRegex = /^\S+@\S+\.\S+$/;
@@ -19,3 +20,6 @@ function validarFormulario() {
 
     return true; 
 }
+//agregar calificacion de estrellas 
+//mostrar datos enviados creando nuevos elementos 
+//mostrar errores creando o mostrando elementos que ya tengamos previamente 

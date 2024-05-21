@@ -1,44 +1,43 @@
-'use strict'
+document.addEventListener('DOMContentLoaded', function() {
+    const grande = document.querySelector('.grande');
+    const puntos = document.querySelectorAll('.punto');
+    const btnLeft = document.querySelector('.btn-left');
+    const btnRight = document.querySelector('.btn-right');
 
-const grande    = document.querySelector('.grande')
-const punto     = document.querySelectorAll('.punto')
+    let index = 0;
 
-// Cuando CLICK en punto
-    // Saber la posición de ese punto
-    // Aplicar un transform translateX al grande
-    // QUITAR la clase activo de TODOS puntos
-    // AÑADIR la clase activo al punto que hemos hecho CLICK
+    function updateCarousel() {
+        grande.style.transform = `translateX(${-index * 100}%)`;
+        updateActivePoint();
+    }
 
-// Recorrer TODOS los punto
-punto.forEach( ( cadaPunto , i )=> {
-    // Asignamos un CLICK a cadaPunto
-    punto[i].addEventListener('click',()=>{
-        console.log('Punto clickeado');
+    function updateActivePoint() {
+        puntos.forEach(punto => punto.classList.remove('activo'));
+        puntos[index].classList.add('activo');
+    }
 
-        // Guardar la posición de ese PUNTO
-        let posicion  = i
-        // Calculando el espacio que debe DESPLAZARSE el GRANDE
-        let operacion = posicion * -50
+    // Navegar por los puntos
+    puntos.forEach((punto, i) => {
+        punto.addEventListener('click', () => {
+            index = i;
+            updateCarousel();
+        });
+    });
 
-        // MOVEMOS el grand
-        grande.style.transform = `translateX(${operacion}%)`;
+    // Funcionalidad de los botones
+    btnLeft.addEventListener('click', () => {
+        index--;
+        if (index < 0) {
+            index = puntos.length - 1;
+        }
+        updateCarousel();
+    });
 
-        // Recorremos TODOS los punto
-        punto.forEach( ( cadaPunto , i )=>{
-            // Quitamos la clase ACTIVO a TODOS los punto
-            punto[i].classList.remove('activo');
-        })
-        // Añadir la clase activo en el punto que hemos hecho CLICK
-        punto[i].classList.add('activo');
-
+    btnRight.addEventListener('click', () => {
+        index++;
+        if (index >= puntos.length) {
+            index = 0;
+        }
+        updateCarousel();
     });
 });
-
-
-
-
-
-
-
-
-

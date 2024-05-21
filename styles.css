@@ -6,28 +6,46 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007B6F;
     padding: 10px 20px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto total del elemento */
 }
 
-header h1 {
+header .logo h1 {
+    color: white;
+    font-family: 'Serif', serif;
     margin: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav ul {
     list-style: none;
+    margin: 0;
     padding: 0;
+    display: flex;
 }
 
 nav ul li {
-    display: inline;
-    margin-right: 20px;
+    margin: 0 15px;
 }
 
 nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
+    font-size: 16px;
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
 }
 
 main {
@@ -35,8 +53,8 @@ main {
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #007B6F;
+    color: white;
     text-align: center;
     padding: 10px 0;
 }
@@ -74,10 +92,12 @@ form button {
 form button:hover {
     background-color: #555;
 }
-/* Estilos específicos carrousel */
+
+/* Estilos específicos carrusel */
 .carrusel {
     width: 90%;
-    max-width: 120em;
+    max-width: 1200px; /* Ajusta el tamaño máximo del carrusel */
+    margin: 0 auto; /* Centra el carrusel */
     padding: 2em;
     color: var(--negro);
     transition: all 0.4s ease;
@@ -85,55 +105,78 @@ form button:hover {
     background-color: var(--blanco);
     box-shadow: 1em 1em 2em var(--sombra-ppal), -1em -1em 2em var(--sombra-sec), inset 0 0 0 transparent, inset 0 0 0 transparent;
     overflow: hidden;
-  }
-  
-  .carrusel .grande {
-    width: 200%;
+    position: relative; /* Necesario para los botones de navegación */
+}
+
+.carrusel .grande {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--negro);
-    transition: all 0.4s ease;
-    border-radius: 1em;
-    background-color: var(--blanco);
-    box-shadow: 1em 1em 2em var(--sombra-ppal), -1em -1em 2em var(--sombra-sec), inset 0 0 0 transparent, inset 0 0 0 transparent;
-    padding: 2em;
-    transition: all 0.5s ease;
-    transform: translateX(0%);
-  }
-  
-  .carrusel .img {
-    width: calc( 100% / 2 - 2em);
-    min-height: 10vh;
-    color: var(--negro);
-    transition: all 0.4s ease;
-    border-radius: 1em;
-    background-color: var(--blanco);
-    box-shadow: 1em 1em 2em var(--sombra-ppal), -1em -1em 2em var(--sombra-sec), inset 0 0 0 transparent, inset 0 0 0 transparent;
-  }
-  
-  .carrusel .puntos {
+    transition: transform 0.5s ease;
+    width: 100%; /* Asegura que las imágenes no excedan el ancho del carrusel */
+}
+
+.carrusel .grande img {
     width: 100%;
-    margin: 1em 0 0;
-    padding: 0.4em;
+    flex-shrink: 0;
+    max-height: 400px; /* Ajusta la altura máxima de las imágenes si es necesario */
+    object-fit: contain; /* Ajusta el tamaño de las imágenes para que se ajusten dentro de su contenedor */
+}
+
+.carrusel .puntos {
     display: flex;
-    flex-flow: row nowrap;
     justify-content: center;
-    align-items: center;
-  }
-  
-  .carrusel .punto {
-    width: 2em;
-    height: 2em;
-    margin: 1em 1em 0;
-    color: var(--negro);
-    transition: all 0.4s ease;
-    border-radius: 1em;
-    background-color: var(--blanco);
-    box-shadow: 0.6em 0.6em 1.2em var(--sombra-ppal), -0.6em -0.6em 1.2em var(--sombra-sec), inset 0 0 0 transparent, inset 0 0 0 transparent;
-  }
-  
-  .carrusel .punto.activo {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.carrusel .punto {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carrusel .punto.activo {
     background-color: lightblue;
-  }
+}
+
+/* Estilos para los botones de navegación */
+.btn-left, .btn-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.btn-left {
+    left: 10px;
+}
+
+.btn-right {
+    right: 10px;
+}
+
+.btn-left:hover, .btn-right:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos para columnas */
+.columnas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.columna {
+    flex: 1 1 calc(50% - 40px); /* Ajuste para dos columnas con margen */
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
