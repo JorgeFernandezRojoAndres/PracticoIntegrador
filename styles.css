@@ -180,3 +180,17 @@ form button:hover {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+/* Estilos para la cuadrícula del menú */
+.menu-seccion {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Las columnas tendrán un ancho mínimo de 300px */
+    gap: 20px; /* Espacio entre las imágenes */
+}
+
+.plato {
+    text-align: center; /* Centra el contenido dentro de cada cuadrícula */
+}
+
+.plato img {
+    max-width: 100%; /* Ajusta el tamaño máximo de las imágenes */
+}
