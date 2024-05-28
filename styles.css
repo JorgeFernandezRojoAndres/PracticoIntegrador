@@ -11,8 +11,8 @@ header {
     align-items: center;
     background-color: #007B6F;
     padding: 10px 20px;
-    width: 100%; /* Asegura que el header ocupe todo el ancho */
-    box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto total del elemento */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header .logo h1 {
@@ -96,8 +96,8 @@ form button:hover {
 /* Estilos específicos carrusel */
 .carrusel {
     width: 90%;
-    max-width: 1200px; /* Ajusta el tamaño máximo del carrusel */
-    margin: 0 auto; /* Centra el carrusel */
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 2em;
     color: var(--negro);
     transition: all 0.4s ease;
@@ -105,20 +105,20 @@ form button:hover {
     background-color: var(--blanco);
     box-shadow: 1em 1em 2em var(--sombra-ppal), -1em -1em 2em var(--sombra-sec), inset 0 0 0 transparent, inset 0 0 0 transparent;
     overflow: hidden;
-    position: relative; /* Necesario para los botones de navegación */
+    position: relative;
 }
 
 .carrusel .grande {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%; /* Asegura que las imágenes no excedan el ancho del carrusel */
+    width: 100%;
 }
 
 .carrusel .grande img {
     width: 100%;
     flex-shrink: 0;
-    max-height: 400px; /* Ajusta la altura máxima de las imágenes si es necesario */
-    object-fit: contain; /* Ajusta el tamaño de las imágenes para que se ajusten dentro de su contenedor */
+    max-height: 400px;
+    object-fit: contain;
 }
 
 .carrusel .puntos {
@@ -174,23 +174,58 @@ form button:hover {
 }
 
 .columna {
-    flex: 1 1 calc(50% - 40px); /* Ajuste para dos columnas con margen */
+    flex: 1 1 calc(50% - 40px);
     margin: 10px;
     padding: 20px;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
 /* Estilos para la cuadrícula del menú */
 .menu-seccion {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Las columnas tendrán un ancho mínimo de 300px */
-    gap: 20px; /* Espacio entre las imágenes */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .plato {
-    text-align: center; /* Centra el contenido dentro de cada cuadrícula */
+    text-align: center;
 }
 
 .plato img {
-    max-width: 100%; /* Ajusta el tamaño máximo de las imágenes */
+    max-width: 100%;
+}
+
+/* Media queries para hacer el diseño responsivo */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .columnas {
+        flex-direction: column;
+    }
+
+    .columna {
+        flex: 1 1 100%;
+        margin: 10px 0;
+    }
+
+    .btn-left, .btn-right {
+        padding: 5px;
+    }
+
+    form {
+        padding: 0 10px;
+    }
 }
