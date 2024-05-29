@@ -25,6 +25,53 @@
                 return successDiv;
             }
 
+            function mostrarMensajeError(mensaje) {
+                const p = document.createElement("p");
+                p.textContent = mensaje;
+                errorDiv.appendChild(p);
+            }
+
+            function validarCampos() {
+                let isValid = true;
+                errorDiv.innerHTML = "";
+
+                // Validar campos vacíos
+                if (nombre.value.trim() === "" || email.value.trim() === "" || telefono.value.trim() === "" || fecha.value.trim() === "" || hora.value.trim() === "" || personas.value.trim() === "") {
+                    isValid = false;
+                    mostrarMensajeError("Por favor, completa todos los campos.");
+                }
+
+                // Validación del nombre para que no contenga números ni caracteres especiales
+                const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+                if (!nombreRegex.test(nombre.value)) {
+                    isValid = false;
+                    mostrarMensajeError("El nombre no debe contener números ni caracteres especiales.");
+                }
+
+                // Validación del email sin usar HTML5
+                const emailRegex = /^\S+@\S+\.\S+$/;
+                if (!emailRegex.test(email.value)) {
+                    isValid = false;
+                    mostrarMensajeError("Por favor, introduce un correo electrónico válido.");
+                }
+
+                // Validación del número de personas
+                const numPersonas = parseInt(personas.value, 10);
+                if (isNaN(numPersonas) || numPersonas < 1) {
+                    isValid = false;
+                    mostrarMensajeError("El número de personas es obligatorio y debe ser al menos 1.");
+                }
+
+                // Validación de la fecha para que no sea una fecha anterior a la fecha actual
+                const today = new Date().toISOString().split('T')[0];
+                if (fecha.value < today) {
+                    isValid = false;
+                    mostrarMensajeError("La fecha de la reserva no puede ser anterior a hoy.");
+                }
+
+                return isValid;
+            }
+
             form.addEventListener("submit", function(event) {
                 event.preventDefault();
                 errorDiv.innerHTML = "";
@@ -33,26 +80,12 @@
                     successDiv = crearMensajeExito();
                 }
                 successDiv.innerHTML = "";
-                let isValid = true;
+                errorDiv.style.display = "none";
+                successDiv.style.display = "none";
 
-                if (nombre.value.trim() === "" || email.value.trim() === "" || telefono.value.trim() === "" || fecha.value.trim() === "" || hora.value.trim() === "" || personas.value.trim() === "") {
-                    isValid = false;
-                    errorDiv.innerHTML = "<p>Por favor, completa todos los campos.</p>";
-                }
-
-                const emailRegex = /^\S+@\S+\.\S+$/;
-                if (!emailRegex.test(email.value)) {
-                    isValid = false;
-                    errorDiv.innerHTML += "<p>Por favor, introduce un correo electrónico válido.</p>";
-                }
-
-                if (personas.value.trim() === "" || personas.value < 1) {
-                    isValid = false;
-                    errorDiv.innerHTML += "<p>El número de personas es obligatorio y debe ser al menos 1.</p>";
-                }
+                const isValid = validarCampos();
 
                 if (isValid) {
-                    errorDiv.style.display = "none";
                     successDiv.innerHTML = `
                         <p>La reserva se gestionó con éxito.</p>
                         <p><strong>Nombre:</strong> ${nombre.value}</p>
@@ -66,7 +99,6 @@
                     form.reset();
                 } else {
                     errorDiv.style.display = "block";
-                    successDiv.style.display = "none";
                 }
             });
         });
@@ -94,7 +126,7 @@
         <section>
             <h2>Reserva una mesa</h2>
             <p>¡Reserva tu mesa y disfruta de una experiencia culinaria única en AltaCocina!</p>
-            <form id="reserva-form">
+            <form id="reserva-form" novalidate>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre">
                 
@@ -119,7 +151,7 @@
         </section>
     </main>
     <footer>
-        <p>Derechos reservadoss &copy; 2024</p>
+        <p>Derechos reservados &copy; 2024</p>
     </footer>
 </body>
 </html>
