@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const grande = document.querySelector('.grande');
-    const puntos = document.querySelectorAll('.punto');
+    const puntos = Array.from(document.querySelectorAll('.punto')); // Convertimos NodeList a Array
     const btnLeft = document.querySelector('.btn-left');
     const btnRight = document.querySelector('.btn-right');
 
