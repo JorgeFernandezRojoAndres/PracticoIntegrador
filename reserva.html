@@ -21,7 +21,7 @@
                 successDiv.id = "mensaje-exito";
                 successDiv.style.color = "green";
                 successDiv.style.display = "none";
-                errorDiv.insertAdjacentElement("afterend", successDiv);
+                form.insertAdjacentElement("afterend", successDiv); // Insert success message after the form
                 return successDiv;
             }
 
@@ -147,7 +147,7 @@
                 
                 <button type="submit">Reservar</button>
             </form>
-            <div id="mensaje-error" style="color: red; display: none;"></div>  
+            <div id="mensaje-error" style="color: red; display: none;"></div>
         </section>
     </main>
     <footer>
